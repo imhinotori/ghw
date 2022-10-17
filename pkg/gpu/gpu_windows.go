@@ -6,11 +6,9 @@
 package gpu
 
 import (
-	"strings"
-	"time"
-
 	"github.com/StackExchange/wmi"
 	"github.com/jaypipes/pcidb"
+	"strings"
 
 	"github.com/imhinotori/ghw/pkg/pci"
 	"github.com/imhinotori/ghw/pkg/util"
@@ -45,26 +43,6 @@ type win32PnPEntity struct {
 	Name              string
 	PNPClass          string
 	PNPDeviceID       string
-}
-
-const wqlPnPSignedDriver = "SELECT DeviceID, DeviceName, Description, DriverDate, DriverName, DriverVersion, DriverProviderName, InstallDate, FriendlyName, Manufacturer FROM Win32_PnPSignedDriver"
-
-type win32PnPSignedDriver struct {
-	Description        string
-	DeviceClass        string
-	DeviceID           string
-	DeviceName         string
-	DriverDate         string
-	DriverName         string
-	DriverVersion      string
-	FriendlyName       string
-	HardWareID         string
-	InstallDate        time.Time
-	Manufacturer       string
-	Name               string
-	PDO                string
-	DriverProviderName string
-	Signer             string
 }
 
 func (i *Info) load() error {
