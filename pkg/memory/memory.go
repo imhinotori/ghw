@@ -26,8 +26,11 @@ type Module struct {
 }
 
 type Area struct {
-	TotalPhysicalBytes int64 `json:"total_physical_bytes"`
-	TotalUsableBytes   int64 `json:"total_usable_bytes"`
+	TotalPhysicalBytes     int64 `json:"total_physical_bytes"`
+	TotalUsableBytes       int64 `json:"total_usable_bytes"`
+	FreePhysicalMemory     int64 `json:"free_physical_memory"`
+	FreeSpaceInPagingFiles int64 `json:"free_space_in_paging_files"`
+	FreeVirtualMemory      int64 `json:"free_virtual_memory"`
 	// An array of sizes, in bytes, of memory pages supported in this area
 	SupportedPageSizes []uint64  `json:"supported_page_sizes"`
 	Modules            []*Module `json:"modules"`

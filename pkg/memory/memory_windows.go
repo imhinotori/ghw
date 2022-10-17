@@ -12,15 +12,12 @@ import (
 	"github.com/imhinotori/ghw/pkg/unitutil"
 )
 
-const wqlOperatingSystem = "SELECT BuildNumber, BuildType, FreePhysicalMemory, FreeSpaceInPagingFiles, FreeVirtualMemory, Name, TotalVirtualMemorySize, TotalVisibleMemorySize FROM Win32_OperatingSystem"
+const wqlOperatingSystem = "SELECT FreePhysicalMemory, FreeSpaceInPagingFiles, FreeVirtualMemory, Name, TotalVirtualMemorySize, TotalVisibleMemorySize FROM Win32_OperatingSystem"
 
 type win32OperatingSystem struct {
-	BuildNumber            *string
-	BuildType              *string
 	FreePhysicalMemory     *uint64
 	FreeSpaceInPagingFiles *uint64
 	FreeVirtualMemory      *uint64
-	Name                   *string
 	TotalVirtualMemorySize *uint64
 	TotalVisibleMemorySize *uint64
 }
@@ -67,13 +64,23 @@ func (i *Info) load() error {
 			Vendor:       *description.Manufacturer,
 		})
 	}
+
 	var totalUsableBytes uint64
+	var freePhysicalBytes uint64
+	var freeVirtualBytes uint64
+	var FreeSpaceInPagingFiles uint64
+
 	for _, description := range win32OSDescriptions {
 		// TotalVisibleMemorySize is the amount of memory available for us by
 		// the operating system **in Kilobytes**
 		totalUsableBytes += *description.TotalVisibleMemorySize * uint64(unitutil.KB)
+		freePhysicalBytes += *description.FreePhysicalMemory * uint64(unitutil.KB)
+		freeVirtualBytes += *description.FreeVirtualMemory * uint64(unitutil.KB)
+		FreeSpaceInPagingFiles += *description.FreeSpaceInPagingFiles * uint64(unitutil.KB)
 	}
 	i.TotalUsableBytes = int64(totalUsableBytes)
 	i.TotalPhysicalBytes = int64(totalPhysicalBytes)
+	i.FreeVirtualMemory = int64(freeVirtualBytes)
+	i.FreeSpaceInPagingFiles = int64(FreeSpaceInPagingFiles)
 	return nil
 }
