@@ -9,7 +9,7 @@ package commands
 import (
 	"fmt"
 
-	"github.com/jaypipes/ghw"
+	"github.com/imhinotori/ghw"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )

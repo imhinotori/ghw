@@ -7,19 +7,19 @@
 package ghw
 
 import (
-	"github.com/jaypipes/ghw/pkg/baseboard"
-	"github.com/jaypipes/ghw/pkg/bios"
-	"github.com/jaypipes/ghw/pkg/block"
-	"github.com/jaypipes/ghw/pkg/chassis"
-	"github.com/jaypipes/ghw/pkg/cpu"
-	"github.com/jaypipes/ghw/pkg/gpu"
-	"github.com/jaypipes/ghw/pkg/memory"
-	"github.com/jaypipes/ghw/pkg/net"
-	"github.com/jaypipes/ghw/pkg/option"
-	"github.com/jaypipes/ghw/pkg/pci"
-	pciaddress "github.com/jaypipes/ghw/pkg/pci/address"
-	"github.com/jaypipes/ghw/pkg/product"
-	"github.com/jaypipes/ghw/pkg/topology"
+	"github.com/imhinotori/ghw/pkg/baseboard"
+	"github.com/imhinotori/ghw/pkg/bios"
+	"github.com/imhinotori/ghw/pkg/block"
+	"github.com/imhinotori/ghw/pkg/chassis"
+	"github.com/imhinotori/ghw/pkg/cpu"
+	"github.com/imhinotori/ghw/pkg/gpu"
+	"github.com/imhinotori/ghw/pkg/memory"
+	"github.com/imhinotori/ghw/pkg/net"
+	"github.com/imhinotori/ghw/pkg/option"
+	"github.com/imhinotori/ghw/pkg/pci"
+	pciaddress "github.com/imhinotori/ghw/pkg/pci/address"
+	"github.com/imhinotori/ghw/pkg/product"
+	"github.com/imhinotori/ghw/pkg/topology"
 )
 
 type WithOption = option.Option

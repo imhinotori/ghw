@@ -13,12 +13,12 @@ import (
 
 	"github.com/jaypipes/pcidb"
 
-	"github.com/jaypipes/ghw/pkg/context"
-	"github.com/jaypipes/ghw/pkg/linuxpath"
-	"github.com/jaypipes/ghw/pkg/option"
-	pciaddr "github.com/jaypipes/ghw/pkg/pci/address"
-	"github.com/jaypipes/ghw/pkg/topology"
-	"github.com/jaypipes/ghw/pkg/util"
+	"github.com/imhinotori/ghw/pkg/context"
+	"github.com/imhinotori/ghw/pkg/linuxpath"
+	"github.com/imhinotori/ghw/pkg/option"
+	pciaddr "github.com/imhinotori/ghw/pkg/pci/address"
+	"github.com/imhinotori/ghw/pkg/topology"
+	"github.com/imhinotori/ghw/pkg/util"
 )
 
 const (

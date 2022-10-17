@@ -1,5 +1,5 @@
 FROM golang:1.15-buster as builder
-WORKDIR /go/src/github.com/jaypipes/ghw
+WORKDIR /go/src/github.com/imhinotori/ghw
 
 # Force the go compiler to use modules.
 ENV GO111MODULE=on
@@ -21,6 +21,6 @@ RUN apk add --no-cache ethtool
 
 WORKDIR /bin
 
-COPY --from=builder /go/src/github.com/jaypipes/ghw/ghwc /bin
+COPY --from=builder /go/src/github.com/imhinotori/ghw/ghwc /bin
 
 CMD ghwc

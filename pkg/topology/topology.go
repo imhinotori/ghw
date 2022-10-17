@@ -13,11 +13,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/jaypipes/ghw/pkg/context"
-	"github.com/jaypipes/ghw/pkg/cpu"
-	"github.com/jaypipes/ghw/pkg/marshal"
-	"github.com/jaypipes/ghw/pkg/memory"
-	"github.com/jaypipes/ghw/pkg/option"
+	"github.com/imhinotori/ghw/pkg/context"
+	"github.com/imhinotori/ghw/pkg/cpu"
+	"github.com/imhinotori/ghw/pkg/marshal"
+	"github.com/imhinotori/ghw/pkg/memory"
+	"github.com/imhinotori/ghw/pkg/option"
 )
 
 // Architecture describes the overall hardware architecture. It can be either

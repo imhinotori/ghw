@@ -1,4 +1,4 @@
-module github.com/jaypipes/ghw
+module github.com/imhinotori/ghw
 
 go 1.15
 

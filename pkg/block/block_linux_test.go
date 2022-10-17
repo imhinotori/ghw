@@ -17,10 +17,10 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/jaypipes/ghw/pkg/context"
-	"github.com/jaypipes/ghw/pkg/linuxpath"
-	"github.com/jaypipes/ghw/pkg/option"
-	"github.com/jaypipes/ghw/pkg/util"
+	"github.com/imhinotori/ghw/pkg/context"
+	"github.com/imhinotori/ghw/pkg/linuxpath"
+	"github.com/imhinotori/ghw/pkg/option"
+	"github.com/imhinotori/ghw/pkg/util"
 )
 
 func TestParseMountEntry(t *testing.T) {

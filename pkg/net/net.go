@@ -9,9 +9,9 @@ package net
 import (
 	"fmt"
 
-	"github.com/jaypipes/ghw/pkg/context"
-	"github.com/jaypipes/ghw/pkg/marshal"
-	"github.com/jaypipes/ghw/pkg/option"
+	"github.com/imhinotori/ghw/pkg/context"
+	"github.com/imhinotori/ghw/pkg/marshal"
+	"github.com/imhinotori/ghw/pkg/option"
 )
 
 type NICCapability struct {
