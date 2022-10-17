@@ -7,6 +7,7 @@ package gpu
 
 import (
 	"strings"
+	"time"
 
 	"github.com/StackExchange/wmi"
 	"github.com/jaypipes/pcidb"
@@ -15,7 +16,7 @@ import (
 	"github.com/jaypipes/ghw/pkg/util"
 )
 
-const wqlVideoController = "SELECT Caption, CreationClassName, Description, DeviceID, Name, PNPDeviceID, SystemCreationClassName, SystemName, VideoArchitecture, VideoMemoryType, VideoModeDescription, VideoProcessor FROM Win32_VideoController"
+const wqlVideoController = "SELECT Caption, CreationClassName, Description, DeviceID, Name, PNPDeviceID, SystemCreationClassName, SystemName, VideoArchitecture, VideoMemoryType, VideoModeDescription, VideoProcessor, DriverName, DriverDate FROM Win32_VideoController"
 
 type win32VideoController struct {
 	Caption                 string
@@ -30,6 +31,8 @@ type win32VideoController struct {
 	VideoMemoryType         uint16
 	VideoModeDescription    string
 	VideoProcessor          string
+	DriverVersion           string
+	DriverDate              time.Time
 }
 
 const wqlPnPEntity = "SELECT Caption, CreationClassName, Description, DeviceID, Manufacturer, Name, PNPClass, PNPDeviceID FROM Win32_PnPEntity"
@@ -45,6 +48,26 @@ type win32PnPEntity struct {
 	PNPDeviceID       string
 }
 
+const wqlPnPSignedDriver = "SELECT DeviceID, DeviceName, Description, DriverDate, DriverName, DriverVersion, DriverProviderName, InstallDate, FriendlyName, Manufacturer FROM Win32_PnPSignedDriver"
+
+type win32PnPSignedDriver struct {
+	Description        string
+	DeviceClass        string
+	DeviceID           string
+	DeviceName         string
+	DriverDate         string
+	DriverName         string
+	DriverVersion      string
+	FriendlyName       string
+	HardWareID         string
+	InstallDate        time.Time
+	Manufacturer       string
+	Name               string
+	PDO                string
+	DriverProviderName string
+	Signer             string
+}
+
 func (i *Info) load() error {
 	// Getting data from WMI
 	var win32VideoControllerDescriptions []win32VideoController
@@ -55,8 +78,8 @@ func (i *Info) load() error {
 	// Building dynamic WHERE clause with addresses to create a single query collecting all desired data
 	queryAddresses := []string{}
 	for _, description := range win32VideoControllerDescriptions {
-		var queryAddres = strings.Replace(description.PNPDeviceID, "\\", `\\`, -1)
-		queryAddresses = append(queryAddresses, "PNPDeviceID='"+queryAddres+"'")
+		var queryAddress = strings.Replace(description.PNPDeviceID, "\\", `\\`, -1)
+		queryAddresses = append(queryAddresses, "PNPDeviceID='"+queryAddress+"'")
 	}
 	whereClause := strings.Join(queryAddresses[:], " OR ")
 
@@ -75,6 +98,7 @@ func (i *Info) load() error {
 			Index:      0,
 			DeviceInfo: GetDevice(description.PNPDeviceID, win32PnPDescriptions),
 		}
+		card.DeviceInfo.Driver = description.DriverVersion + " - " + description.DriverDate.Format("2006-01-02")
 		cards = append(cards, card)
 	}
 	i.GraphicsCards = cards
@@ -116,6 +140,7 @@ func GetDevice(id string, entities []win32PnPEntity) *pci.Device {
 			ID:   util.UNKNOWN,
 			Name: util.UNKNOWN,
 		},
+		Driver: util.UNKNOWN,
 	}
 	// If an entity is found we get its data inside the standard structure
 	for _, description := range entities {
