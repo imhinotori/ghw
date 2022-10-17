@@ -16,7 +16,7 @@ import (
 	"github.com/imhinotori/ghw/pkg/util"
 )
 
-const wqlVideoController = "SELECT Caption, CreationClassName, Description, DeviceID, Name, PNPDeviceID, SystemCreationClassName, SystemName, VideoArchitecture, VideoMemoryType, VideoModeDescription, VideoProcessor, DriverName, DriverDate FROM Win32_VideoController"
+const wqlVideoController = "SELECT Caption, CreationClassName, Description, DeviceID, Name, PNPDeviceID, SystemCreationClassName, SystemName, VideoArchitecture, VideoMemoryType, VideoModeDescription, VideoProcessor, DriverName FROM Win32_VideoController"
 
 type win32VideoController struct {
 	Caption                 string
@@ -32,7 +32,6 @@ type win32VideoController struct {
 	VideoModeDescription    string
 	VideoProcessor          string
 	DriverVersion           string
-	DriverDate              time.Time
 }
 
 const wqlPnPEntity = "SELECT Caption, CreationClassName, Description, DeviceID, Manufacturer, Name, PNPClass, PNPDeviceID FROM Win32_PnPEntity"
@@ -98,7 +97,7 @@ func (i *Info) load() error {
 			Index:      0,
 			DeviceInfo: GetDevice(description.PNPDeviceID, win32PnPDescriptions),
 		}
-		card.DeviceInfo.Driver = description.DriverVersion + " - " + description.DriverDate.Format("2006-01-02")
+		card.DeviceInfo.Driver = description.DriverVersion
 		cards = append(cards, card)
 	}
 	i.GraphicsCards = cards

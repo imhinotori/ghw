@@ -12,9 +12,16 @@ import (
 	"github.com/imhinotori/ghw/pkg/unitutil"
 )
 
-const wqlOperatingSystem = "SELECT TotalVisibleMemorySize FROM Win32_OperatingSystem"
+const wqlOperatingSystem = "SELECT BuildNumber, BuildType, FreePhysicalMemory, FreeSpaceInPagingFiles, FreeVirtualMemory, Name, TotalVirtualMemorySize, TotalVisibleMemorySize FROM Win32_OperatingSystem"
 
 type win32OperatingSystem struct {
+	BuildNumber            *string
+	BuildType              *string
+	FreePhysicalMemory     *uint64
+	FreeSpaceInPagingFiles *uint64
+	FreeVirtualMemory      *uint64
+	Name                   *string
+	TotalVirtualMemorySize *uint64
 	TotalVisibleMemorySize *uint64
 }
 
