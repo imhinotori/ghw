@@ -14,7 +14,7 @@ import (
 	"github.com/imhinotori/ghw/pkg/util"
 )
 
-const wqlVideoController = "SELECT Caption, CreationClassName, Description, DeviceID, Name, PNPDeviceID, SystemCreationClassName, SystemName, VideoArchitecture, VideoMemoryType, VideoModeDescription, VideoProcessor, DriverName FROM Win32_VideoController"
+const wqlVideoController = "SELECT Caption, CreationClassName, Description, DeviceID, Name, PNPDeviceID, SystemCreationClassName, SystemName, VideoArchitecture, VideoMemoryType, VideoModeDescription, VideoProcessor, DriverVersion FROM Win32_VideoController"
 
 type win32VideoController struct {
 	Caption                 string
