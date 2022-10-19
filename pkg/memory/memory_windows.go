@@ -8,8 +8,6 @@ package memory
 
 import (
 	"github.com/StackExchange/wmi"
-
-	"github.com/imhinotori/ghw/pkg/unitutil"
 )
 
 const wqlOperatingSystem = "SELECT FreePhysicalMemory, FreeSpaceInPagingFiles, FreeVirtualMemory, Name, TotalVirtualMemorySize, TotalVisibleMemorySize FROM Win32_OperatingSystem"
@@ -72,11 +70,11 @@ func (i *Info) load() error {
 
 	for _, description := range win32OSDescriptions {
 		// TotalVisibleMemorySize is the amount of memory available for us by
-		// the operating system **in Kilobytes**
-		totalUsableBytes += *description.TotalVisibleMemorySize * uint64(unitutil.KB)
-		freePhysicalBytes += *description.FreePhysicalMemory * uint64(unitutil.KB)
-		freeVirtualBytes += *description.FreeVirtualMemory * uint64(unitutil.KB)
-		FreeSpaceInPagingFiles += *description.FreeSpaceInPagingFiles * uint64(unitutil.KB)
+		// the operating system **in Bytes**
+		totalUsableBytes += *description.TotalVisibleMemorySize
+		freePhysicalBytes += *description.FreePhysicalMemory
+		freeVirtualBytes += *description.FreeVirtualMemory
+		FreeSpaceInPagingFiles += *description.FreeSpaceInPagingFiles
 	}
 	i.TotalUsableBytes = int64(totalUsableBytes)
 	i.TotalPhysicalBytes = int64(totalPhysicalBytes)
