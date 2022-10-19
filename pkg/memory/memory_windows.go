@@ -82,5 +82,6 @@ func (i *Info) load() error {
 	i.TotalPhysicalBytes = int64(totalPhysicalBytes)
 	i.FreeVirtualMemory = int64(freeVirtualBytes)
 	i.FreeSpaceInPagingFiles = int64(FreeSpaceInPagingFiles)
+	i.FreePhysicalMemory = int64(freePhysicalBytes)
 	return nil
 }
